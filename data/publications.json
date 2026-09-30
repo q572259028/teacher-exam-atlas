@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T09:41:31+00:00",
+  "generatedAt": "2026-09-30T09:42:45+00:00",
   "sources": [
     {
       "id": "hangzhou",
@@ -31,18 +31,18 @@
   ],
   "health": {
     "hangzhou": {
-      "ok": true,
-      "checkedAt": "2026-09-30T09:41:31+00:00",
-      "linksFound": 0
+      "ok": false,
+      "checkedAt": "2026-09-30T09:42:45+00:00",
+      "error": "<urlopen error _ssl.c:993: The handshake operation timed out>"
     },
     "guangzhou": {
       "ok": true,
-      "checkedAt": "2026-09-30T09:41:31+00:00",
+      "checkedAt": "2026-09-30T09:42:45+00:00",
       "linksFound": 0
     },
     "shenzhen": {
       "ok": true,
-      "checkedAt": "2026-09-30T09:41:31+00:00",
+      "checkedAt": "2026-09-30T09:42:45+00:00",
       "linksFound": 1
     }
   },
@@ -232,7 +232,7 @@
       "verified": null,
       "notes": "自动发现的官方链接；岗位、编制属性、考试信息与报名状态尚未人工核对。",
       "firstSeen": "2026-09-30T09:19:51+00:00",
-      "lastSeen": "2026-09-30T09:41:31+00:00"
+      "lastSeen": "2026-09-30T09:42:45+00:00"
     }
   ],
   "history": [],
