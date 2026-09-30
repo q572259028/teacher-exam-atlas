@@ -1,0 +1,6 @@
+[
+  {"id":"beijing","name":"北京市人力资源和社会保障局","region":"北京","url":"https://rsj.beijing.gov.cn/xxgk/gkzp/","host":"rsj.beijing.gov.cn","kind":"list","scope":"北京市事业单位公开招聘"},
+  {"id":"shanghai","name":"上海市人力资源和社会保障局","region":"上海","url":"https://rsj.sh.gov.cn/tsydwgkzp_17406/index.html","host":"rsj.sh.gov.cn","kind":"list","scope":"上海市事业单位公开招聘"},
+  {"id":"hunan","name":"湖南省人力资源和社会保障厅","region":"湖南","url":"https://rst.hunan.gov.cn/rst/xxgk/zpzl/sydwzp/index.html","host":"rst.hunan.gov.cn","kind":"list","scope":"湖南省事业单位招聘"},
+  {"id":"gansu","name":"甘肃人事考试网","region":"甘肃","url":"https://ks.rst.gansu.gov.cn/ncms/wzlb.shtml?mkbh=gwysydwks","host":"ks.rst.gansu.gov.cn","kind":"list","scope":"甘肃省事业单位分类考试"}
+]
