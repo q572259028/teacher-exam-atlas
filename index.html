@@ -3,58 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f6f2">
-  <meta name="description" content="2026年教师事业单位招聘公告导航。官方来源、小时级巡检、考试与工作地点分开呈现。">
-  <title>师考雷达｜2026教师编制招聘信息</title>
+  <meta name="theme-color" content="#f6f7f3">
+  <meta name="description" content="聚焦杭州、广州、深圳实际工作地点的信息技术教师编制岗位，区分岗位地点与考试考场。">
+  <title>师考雷达｜杭广深信息技术教师岗位</title>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="师考雷达首页"><span class="brand-mark">师</span><span>师考雷达<small>TEACHER EXAM ATLAS</small></span></a>
-    <nav aria-label="主导航"><a href="#notices">最新公告</a><a href="#sources">官方入口</a><a href="#insights">招录数据</a><a href="#plans">后续计划</a></nav>
-    <a class="top-action" href="#sources">查看信息来源 <span aria-hidden="true">↗</span></a>
-  </header>
-  <main id="top">
-    <section class="hero wrap">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="pulse"></span> 2026 教师事业单位招聘信息平台</div>
-        <h1>重要的考试信息，<br><em>从官方公告开始。</em></h1>
-        <p>汇集人社部门发布的教师招聘链接，持续巡检更新。报名条件、考试安排与岗位去向逐条展示，每项信息都能回到原文核对。</p>
-        <div class="hero-actions"><a class="primary-btn" href="#notices">浏览最新公告 <span>↗</span></a><a class="text-btn" href="#how">了解数据规则 <span>→</span></a></div>
-        <div class="hero-foot"><span class="hero-rule"></span><span>所有报考决定，请以招聘单位的最新原文及附件为准</span></div>
-      </div>
-      <div class="hero-panel" aria-label="平台更新概况">
-        <div class="panel-head"><span>信息巡检台</span><span class="panel-live"><span class="pulse"></span> 官方来源</span></div>
-        <div class="panel-main"><span class="panel-kicker">CURRENT COVERAGE</span><strong id="source-count">04</strong><span class="panel-unit">个已接入官方栏目</span></div>
-        <div class="panel-divider"></div>
-        <div class="panel-row"><span>最近一次巡检</span><b id="last-check">等待首次运行</b></div>
-        <div class="panel-row"><span>巡检频率</span><b>每小时一次</b></div>
-        <div class="panel-row"><span>已核实公告</span><b id="verified-count">04 则</b></div>
-        <div class="panel-bottom">发现新链接 → 标记待核 → 对照官方原文</div>
-      </div>
+  <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="#top" aria-label="师考雷达首页"><span class="brand-mark">师</span><span>师考雷达</span></a><span class="topbar-note">2026 · 信息技术教师编制</span></div></header>
+  <main id="top" class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="eyebrow">岗位实际工作地点 · 杭州 / 广州 / 深圳</div>
+      <h1 id="page-title">信息技术教师岗位 <em>· 杭广深</em></h1>
+      <p>按实际任职地点筛选，考试地点另列。官方栏目每小时尝试巡检，新岗位核实后进入清单。</p>
     </section>
-
-    <section class="metrics-band" aria-label="信息概览"><div class="wrap metrics-grid">
-      <div><strong id="metric-notices">—</strong><span>已核实公告</span></div><div><strong id="metric-links">—</strong><span>自动发现链接</span></div><div><strong id="metric-active">—</strong><span>已核实报名中</span></div><div><strong id="metric-sources">—</strong><span>官方监测栏目</span></div>
-    </div></section>
-
-    <section class="section wrap" id="notices">
-      <div class="section-header"><div><span class="section-index">01 / OFFICIAL NOTICES</span><h2>最新考试与招聘公告</h2><p>先看已核实摘要，再打开官网阅读全文和附件。自动发现的链接会明确标为“待核详情”。</p></div><div class="section-note">↗ 每条公告均可追溯至官方原文</div></div>
-      <div class="toolbar"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索地区、学校或岗位" aria-label="搜索公告"></label><select id="region-filter" aria-label="按地区筛选"><option value="">全部地区</option></select><select id="type-filter" aria-label="按数据状态筛选"><option value="all">全部公告</option><option value="verified">已核实摘要</option><option value="discovered">自动发现链接</option></select></div>
-      <div class="results-head"><span id="results-label">加载中…</span><span>按公告发布日期排序</span></div>
-      <div id="notice-list" class="notice-list" aria-live="polite"></div><button id="show-more" class="more-btn" hidden>查看更多公告 ↓</button>
+    <section class="summary" aria-label="岗位概况">
+      <div><strong id="active-count">—</strong><span>正在报名的已核实岗位</span></div>
+      <div><strong id="position-count">—</strong><span>已核实目标岗位</span></div>
+      <div><strong id="last-check">—</strong><span>最近一次官方栏目巡检 · 北京时间</span></div>
     </section>
-
-    <section class="section soft-section" id="sources"><div class="wrap"><div class="section-header"><div><span class="section-index">02 / TRUSTED SOURCES</span><h2>权威信息入口</h2><p>直接进入各地人社部门公开招聘栏目。覆盖范围会逐步扩展，栏目巡检状态公开可查。</p></div><div class="section-note">仅收录已核验政府域名</div></div><div id="source-list" class="source-grid"></div></div></section>
-
-    <section class="section wrap" id="insights"><div class="section-header"><div><span class="section-index">03 / HISTORICAL DATA</span><h2>历史招录数据</h2><p>按地区和岗位统计实际参加考试人数、最终录用人数及通过比例，并展示原始公告出处。</p></div></div><div id="history-content" class="empty-data"><div class="empty-icon">∑</div><div><h3>暂无可比的官方完整数据</h3><p>已核实公告公布了计划招聘人数，但未同时公开对应岗位的实考人数与最终录用人数。平台不会把“计划数 ÷ 报名数”称为通过率。</p><a href="#how">查看统计口径 →</a></div></div></section>
-
-    <section class="section soft-section" id="plans"><div class="wrap"><div class="section-header"><div><span class="section-index">04 / UPCOMING</span><h2>后续招聘计划</h2><p>仅列出有官方文件依据的计划或安排。未公布具体批次时，不推测考试日期。</p></div></div><div id="plan-list" class="plan-list"></div></div></section>
-
-    <section class="section wrap methodology" id="how"><div><span class="section-index">DATA GUIDE</span><h2>读懂这份信息</h2></div><div class="method-grid"><article><span>01</span><h3>考场与岗位分开</h3><p>准考证或后续通知给出考场；招聘岗位表、单位通知给出实际工作地点。官网页脚和联系人地址均不自动视为考场。</p></article><article><span>02</span><h3>缺失字段不猜测</h3><p>公告没有明确写出的科目、考试日期、编制属性及具体校区，会显示“待公布 / 见原文附件”，不会从其他地区套用。</p></article><article><span>03</span><h3>统计口径可追溯</h3><p>通过率 = 同一岗位、同一批次最终录用人数 ÷ 实际参加考试人数。两项分母分子不齐全时留空。</p></article><article><span>04</span><h3>小时级巡检</h3><p>定时任务每小时尝试读取已接入的官方栏目。实际发现和上线时间会受官网可访问性及托管平台调度影响。</p></article></div></section>
+    <section class="jobs section" id="jobs" aria-labelledby="jobs-title">
+      <div class="section-heading"><div><p class="section-kicker">FOCUSED RESULTS</p><h2 id="jobs-title">岗位清单</h2><p>按报名状态和发布日期排序；每条都指向官方原文或岗位表。</p></div><span class="result-count" id="results-label">加载中…</span></div>
+      <div class="filters"><label class="search-field"><span class="sr-only">搜索学校或岗位</span><input id="search" type="search" placeholder="搜索学校、岗位或区县"></label><label class="city-field"><span class="sr-only">选择工作城市</span><select id="city-filter"><option value="">全部工作城市</option><option value="杭州">杭州</option><option value="广州">广州</option><option value="深圳">深圳</option></select></label></div>
+      <div id="notice-list" class="notice-list" aria-live="polite"></div>
+    </section>
+    <section class="context section" aria-label="来源与数据说明">
+      <div class="context-row"><div><h2>官方巡检入口</h2><p>仅作新公告线索。公告标题通常不含具体学科，发现链接后仍须核对岗位表和工作地点。</p></div><div id="source-list" class="source-list"></div></div>
+      <div class="context-row"><div><h2>历史招录与后续计划</h2><p>暂无同一岗位、同一批次的官方实考人数和最终录用人数，暂不计算通过比例。</p><p>三地信息技术岗位的下一批具体时间，待官方发布后更新。</p></div><div class="method-note"><b>地点口径</b><span>工作地点看招聘学校及岗位表；考试地点看准考证或考务通知。学校联系地址不自动视作任职校区。</span></div></div>
+    </section>
   </main>
-  <footer><div class="wrap footer-inner"><div class="footer-brand"><span class="brand-mark">师</span><div><strong>师考雷达</strong><p>让每一次报考，都有据可查。</p></div></div><div class="footer-links"><a href="#notices">公告</a><a href="#sources">来源</a><a href="#insights">数据</a><a href="#how">说明</a></div><p class="footer-note">独立信息导航项目。报名、缴费、准考证与考试事项以招聘单位官方通知为准。</p></div></footer>
-  <dialog id="detail-dialog"><div class="dialog-top"><span class="section-index">NOTICE DETAILS</span><button id="close-dialog" aria-label="关闭详情">×</button></div><div id="dialog-content"></div></dialog>
+  <footer><div class="wrap">独立信息导航项目 · 报名资格、编制属性和考试安排以最新官方公告及附件为准。</div></footer>
 </body>
 </html>

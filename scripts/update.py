@@ -18,8 +18,8 @@ CURATED = ROOT / "data/curated.json"
 OUTPUT = ROOT / "data/publications.json"
 DATE = re.compile(r"20\d{2}[-./年]\d{1,2}[-./月]\d{1,2}")
 EDUCATION = re.compile(r"教师|教育|幼儿园|师范|学校|学院|大学|辅导员|教委")
-RECRUITMENT = re.compile(r"招聘|招录|招考|聘用|岗位|考试|人才引进")
-SKIP = re.compile(r"公务员|军队文职|三支一扶|特岗教师|志愿者")
+RECRUITMENT = re.compile(r"招聘|选聘|招录|招考|人才引进")
+SKIP = re.compile(r"公务员|军队文职|三支一扶|特岗教师|志愿者|拟聘|公示|面试公告|成绩|体检|资格复审")
 
 
 class Links(HTMLParser):
@@ -98,7 +98,8 @@ def main():
     sources = json.loads(SOURCES.read_text(encoding="utf-8"))
     curated = json.loads(CURATED.read_text(encoding="utf-8"))
     old = json.loads(OUTPUT.read_text(encoding="utf-8")) if OUTPUT.exists() else {}
-    previous = {item["url"]: item for item in old.get("discovered", [])}
+    source_ids = {source["id"] for source in sources}
+    previous = {item["url"]: item for item in old.get("discovered", []) if item.get("sourceId") in source_ids}
     health = {}
     for source in sources:
         try:

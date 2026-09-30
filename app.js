@@ -1,9 +1,9 @@
 const $ = (selector) => document.querySelector(selector);
-const cnDate = (value) => value ? value.replaceAll('-', '.') : '日期待核';
-const present = (value, fallback = '公告未公布') => value ?? fallback;
+const FOCUS_CITIES = new Set(['杭州', '广州', '深圳']);
+const FOCUS_SUBJECT = /信息技术|信息科技|计算机|人工智能/;
 const todayChina = () => new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-let dataset = null;
-let visibleCount = 8;
+const formatDate = (value) => value ? value.replaceAll('-', '.') : '未公布';
+let dataset;
 
 function node(tag, className, content) {
   const element = document.createElement(tag);
@@ -15,117 +15,83 @@ function safeLink(url) {
   try { const parsed = new URL(url); return parsed.protocol === 'https:' ? parsed.href : '#'; }
   catch { return '#'; }
 }
-function sourceFor(id) { return dataset.sources.find(item => item.id === id); }
-function statusFor(item) {
-  if (!item.applyDeadline) return item.status;
-  return item.applyDeadline < todayChina() ? '报名已结束' : item.status;
+function focusedNotices() {
+  return dataset.notices.filter(item => FOCUS_CITIES.has(item.workCity) && FOCUS_SUBJECT.test(item.subject || ''));
 }
-function allNotices() {
-  const verified = dataset.notices.map(item => ({...item, verifiedRecord:true}));
-  const discovered = dataset.discovered.map(item => ({...item, verifiedRecord:false}));
-  return [...verified, ...discovered].sort((a,b) => (b.published || '').localeCompare(a.published || ''));
+function isOpen(item) {
+  return !!item.applyDeadline && item.applyDeadline >= todayChina() && item.status === '报名中';
 }
-function renderMetrics() {
-  $('#source-count').textContent = String(dataset.sources.length).padStart(2,'0');
-  $('#verified-count').textContent = `${dataset.notices.length} 则`;
-  $('#metric-notices').textContent = dataset.notices.length;
-  $('#metric-links').textContent = dataset.discovered.length;
-  $('#metric-active').textContent = dataset.notices.filter(x => statusFor(x) === '报名中').length;
-  $('#metric-sources').textContent = dataset.sources.length;
-  $('#last-check').textContent = dataset.generatedAt ? new Date(dataset.generatedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}) : '尚未自动巡检';
-}
-function renderRegions() {
-  const select = $('#region-filter');
-  [...new Set(dataset.sources.map(s => s.region))].sort().forEach(region => {
-    const option = node('option','',region); option.value = region; select.append(option);
-  });
+function field(label, value, className = '') {
+  const box = node('div', 'field ' + className);
+  box.append(node('dt','',label),node('dd','',value || '公告未公布'));
+  return box;
 }
 function renderNotices() {
-  const search = $('#search').value.trim().toLowerCase();
-  const region = $('#region-filter').value;
-  const type = $('#type-filter').value;
-  const filtered = allNotices().filter(item => (!region || item.region === region) &&
-    (type === 'all' || (type === 'verified') === item.verifiedRecord) &&
-    (!search || [item.title,item.region,item.city,item.school,item.positions].some(v => v?.toLowerCase().includes(search))));
-  $('#results-label').textContent = `找到 ${filtered.length} 条相关信息`;
+  const query = $('#search').value.trim().toLowerCase();
+  const city = $('#city-filter').value;
+  const items = focusedNotices()
+    .filter(item => (!city || item.workCity === city) && (!query || [item.title,item.school,item.positions,item.workDistrict,item.positionCode].some(value => value?.toLowerCase().includes(query))))
+    .sort((a,b) => Number(isOpen(b)) - Number(isOpen(a)) || (b.published || '').localeCompare(a.published || ''));
+  $('#results-label').textContent = items.length + ' 条岗位';
   const list = $('#notice-list'); list.replaceChildren();
-  filtered.slice(0,visibleCount).forEach(item => {
+  if (!items.length) {
+    const empty = node('div','empty-state');
+    empty.append(node('strong','','没有符合筛选条件的已核实岗位'),node('p','','可调整搜索；新公告只有核实学科及工作地点后才会进入清单。'));
+    list.append(empty); return;
+  }
+  items.forEach(item => {
     const card = node('article','notice-card');
-    const body = node('div'); const tags = node('div','notice-tags');
-    tags.append(node('span','tag',item.region),node('span',item.verifiedRecord ? 'tag' : 'tag amber',item.verifiedRecord ? '已核实摘要' : '自动发现·待核'));
-    if (item.verifiedRecord && statusFor(item) === '报名中') tags.append(node('span','tag gray','报名中'));
-    body.append(tags,node('h3','',item.title));
-    const meta = node('div','notice-meta');
-    [item.city || item.region,`发布日期 ${cnDate(item.published)}`,sourceFor(item.sourceId)?.name || '官方来源',item.verifiedRecord ? `摘要核对 ${cnDate(item.verified)}` : null].filter(Boolean).forEach(value => meta.append(node('span','',value)));
-    body.append(meta);
-    const button = node('button','',item.verifiedRecord ? '查看详情 ↗' : '查看链接 ↗');
-    button.type = 'button'; button.addEventListener('click',() => openDetails(item));
-    card.append(body,button); list.append(card);
+    const head = node('div','card-head');
+    const title = node('div','card-title');
+    title.append(node('div','card-meta',item.workCity + (item.workDistrict ? ' · ' + item.workDistrict : '') + '  /  ' + (item.school || '招聘单位待核')),node('h3','',item.positions || item.title));
+    const status = node('span',isOpen(item) ? 'status open' : 'status closed',isOpen(item) ? '报名中' : '报名已结束');
+    head.append(title,status);
+    const facts = node('dl','fact-grid');
+    facts.append(
+      field('实际工作地点',item.workplace,'emphasis'),
+      field('考试地点 / 考场',item.examVenue),
+      field('计划招聘',item.plannedHires == null ? null : item.plannedHires + ' 人'),
+      field('报名截止',item.applyDeadline ? formatDate(item.applyDeadline) : null),
+      field('考试时间',item.examTime),
+      field('考试科目 / 方式',item.subjects),
+      field('资格要点',item.qualifications,'wide')
+    );
+    const foot = node('div','card-foot');
+    const codeLabel = item.sourceId === 'hangzhou' ? '岗位表序号 ' : '岗位编号 ';
+    foot.append(node('span','',(item.positionCode ? codeLabel + item.positionCode + ' · ' : '') + '公告 ' + formatDate(item.published) + ' · 核对 ' + formatDate(item.verified)));
+    const link = node('a','official-link','官方原文 ↗'); link.href = safeLink(item.url); link.target = '_blank'; link.rel = 'noopener noreferrer';
+    foot.append(link);
+    card.append(head,facts,foot); list.append(card);
   });
-  $('#show-more').hidden = filtered.length <= visibleCount;
 }
-function detailItem(label,value,wide=false) {
-  const item = node('div',wide ? 'detail-item wide' : 'detail-item');
-  item.append(node('span','',label),node('strong','',present(value)));
-  return item;
-}
-function openDetails(item) {
-  const box = $('#dialog-content'); box.replaceChildren();
-  box.append(node('h2','dialog-title',item.title));
-  box.append(node('div','dialog-sub',`${item.region} · 发布于 ${cnDate(item.published)} · ${sourceFor(item.sourceId)?.name || '官方来源'}${item.verified ? ` · 摘要核对于 ${cnDate(item.verified)}` : ''}`));
-  const grid = node('div','detail-grid');
-  grid.append(detailItem('招聘岗位',item.positions),detailItem('计划招聘人数',item.plannedHires === null ? null : `${item.plannedHires} 人`));
-  grid.append(detailItem('报名时间',item.applyWindow),detailItem('考试时间',item.examTime));
-  grid.append(detailItem('考试地点 / 考场',item.examVenue),detailItem('岗位实际工作地点',item.workplace));
-  grid.append(detailItem('报考资格',item.qualifications,true),detailItem('考试科目 / 考核方式',item.subjects,true));
-  box.append(grid);
-  box.append(node('p','detail-note',item.notes || '该链接由程序自动发现，具体信息请核对官方原文及附件。'));
-  const link = node('a','detail-link','打开官方公告原文 ↗'); link.href=safeLink(item.url); link.target='_blank'; link.rel='noopener noreferrer'; box.append(link);
-  $('#detail-dialog').showModal();
+function renderSummary() {
+  const focused = focusedNotices();
+  $('#active-count').textContent = focused.filter(isOpen).length;
+  $('#position-count').textContent = focused.length;
+  $('#last-check').textContent = dataset.generatedAt ? new Date(dataset.generatedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}) : '尚未运行';
 }
 function renderSources() {
-  const list = $('#source-list'); list.replaceChildren();
-  dataset.sources.forEach(source => {
+  const box = $('#source-list'); box.replaceChildren();
+  dataset.sources.filter(source => FOCUS_CITIES.has(source.region)).forEach(source => {
+    const row = node('div','source-row');
+    const link = node('a','',source.region + ' · ' + source.name + ' ↗');
+    link.href = safeLink(source.url); link.target = '_blank'; link.rel = 'noopener noreferrer';
     const health = dataset.health?.[source.id];
-    const card = node('article','source-card'); const top = node('div','source-top');
-    top.append(node('div','source-icon',source.region[0]));
-    top.append(node('span',health?.ok === false ? 'health bad':'health',health ? (health.ok ? '巡检正常' : '巡检失败') : '待首次巡检'));
-    card.append(top,node('h3','',source.name),node('p','',`${source.region} · ${source.scope}`),node('span','source-url',source.url));
-    const link=node('a','source-link','访问官方栏目 ↗');link.href=safeLink(source.url);link.target='_blank';link.rel='noopener noreferrer';card.append(link);list.append(card);
-  });
-}
-function renderHistory() {
-  if (!dataset.history.length) return;
-  const box=$('#history-content');box.className='history-table-wrap';box.replaceChildren();
-  const table=node('table','history-table');const head=node('thead');const tr=node('tr');
-  ['地区 / 岗位','年份','实考人数','最终录用','通过比例','官方出处'].forEach(x=>tr.append(node('th','',x)));head.append(tr);table.append(head);
-  const tbody=node('tbody');dataset.history.forEach(row=>{
-    const line=node('tr');[`${row.region} / ${row.position}`,row.year,row.examTakers,row.finalHires,`${(row.finalHires/row.examTakers*100).toFixed(1)}%`].forEach(x=>line.append(node('td','',x)));
-    const td=node('td');const a=node('a','', '查看原文 ↗');a.href=safeLink(row.url);a.target='_blank';a.rel='noopener noreferrer';td.append(a);line.append(td);tbody.append(line);
-  });table.append(tbody);box.append(table);
-}
-function renderPlans() {
-  const list=$('#plan-list');list.replaceChildren();
-  dataset.plans.forEach(plan=>{
-    const card=node('article','plan-card');const body=node('div');body.append(node('h3','',`${plan.region} · ${plan.title}`),node('p','',plan.detail));
-    const link=node('a','', '查看政策原文 ↗');link.href=safeLink(plan.url);link.target='_blank';link.rel='noopener noreferrer';card.append(body,link);list.append(card);
+    row.append(link,node('span',health?.ok === false ? 'source-health failed':'source-health',health ? (health.ok ? '巡检正常' : '巡检失败') : '待巡检'));
+    box.append(row);
   });
 }
 async function start() {
   try {
-    const response=await fetch('data/publications.json',{cache:'no-store'});
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    dataset=await response.json();
-    renderMetrics();renderRegions();renderNotices();renderSources();renderHistory();renderPlans();
+    const response = await fetch('data/publications.json',{cache:'no-store'});
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    dataset = await response.json();
+    renderSummary(); renderNotices(); renderSources();
   } catch (error) {
-    $('#results-label').textContent='数据暂时无法加载';
-    $('#notice-list').append(node('p','',`请稍后刷新页面。${error.message}`));
+    $('#results-label').textContent = '数据暂时无法加载';
+    $('#notice-list').append(node('p','load-error','请稍后刷新页面。' + error.message));
   }
 }
-$('#search').addEventListener('input',()=>{visibleCount=8;renderNotices();});
-$('#region-filter').addEventListener('change',()=>{visibleCount=8;renderNotices();});
-$('#type-filter').addEventListener('change',()=>{visibleCount=8;renderNotices();});
-$('#show-more').addEventListener('click',()=>{visibleCount+=8;renderNotices();});
-$('#close-dialog').addEventListener('click',()=>$('#detail-dialog').close());
-$('#detail-dialog').addEventListener('click',event=>{if(event.target.id==='detail-dialog')event.target.close();});
+$('#search').addEventListener('input',renderNotices);
+$('#city-filter').addEventListener('change',renderNotices);
 start();

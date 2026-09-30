@@ -1,68 +1,86 @@
 {
   "notices": [
     {
-      "id":"shanghai-20260929-sgsw",
-      "title":"上海市工商外国语学校2026年度工作人员公开招聘公告（第四批）",
-      "region":"上海","city":"上海","sourceId":"shanghai","published":"2026-09-29",
-      "url":"https://rsj.sh.gov.cn/tzpgg_17408/20260928/t0035_1443938.html",
-      "kind":"招聘公告","school":"上海市工商外国语学校","positions":"数学教师1人、电子信息教师1人","plannedHires":2,
-      "applyWindow":"即日起至2026-10-15","applyDeadline":"2026-10-15","examTime":null,"examVenue":null,
-      "workplace":"上海市工商外国语学校；公告列徐汇区、闵行区两处学校地址，具体任职校区需向学校确认。",
-      "qualifications":"岗位所需学历、专业、资格等见招聘简章附件；社会人员应聘专任教师须有中职及以上教师资格证。",
-      "subjects":"公共笔试和专业笔试（岗位基本理论、专业知识）；面试及教师岗位试讲。",
-      "status":"报名中","verified":"2026-09-30","notes":"原文未公布笔试时间和考场；学校地址不等于考场，也未指定岗位任职校区。"
+      "id":"hangzhou-yuhang-20260108-jingshan-it",
+      "title":"杭州市余杭区2026年第一批公开招聘中小学事业编制教师",
+      "region":"杭州","workCity":"杭州","workDistrict":"余杭区","sourceId":"hangzhou","published":"2026-01-08",
+      "url":"https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cef729e8b88242509ac28d6a18f7b99d.pdf",
+      "school":"杭州学军中学教育集团径山高级中学","positions":"径山高中信息技术教师","subject":"信息技术","positionCode":"39","plannedHires":1,
+      "applyDeadline":"2026-01-16","examTime":"学校自主考核，具体时间以通知为准","examVenue":"以考核通知为准",
+      "workplace":"杭州市余杭区·杭州学军中学教育集团径山高级中学；具体任职校区请向学校核实。",
+      "qualifications":"适用的教师资格证；专业要求含计算机科学与技术、教育技术学、软件工程、人工智能等，完整条件见岗位表。",
+      "subjects":"学校自主考核；具体科目以学校通知为准。","status":"报名已结束","verified":"2026-09-30"
     },
     {
-      "id":"hunan-20260929-kindergarten",
-      "title":"长沙师范学院附属第一幼儿园2026年骨干教师公开招聘公告",
-      "region":"湖南","city":"长沙","sourceId":"hunan","published":"2026-09-29",
-      "url":"https://rst.hunan.gov.cn/rst/xxgk/zpzl/sydwzp/202609/t20260929_34074113.html",
-      "kind":"招聘公告","school":"长沙师范学院附属第一幼儿园","positions":"骨干教师（专业技术岗位）","plannedHires":1,
-      "applyWindow":"公告发布日至2026-12-31，招满即止","applyDeadline":"2026-12-31","examTime":null,"examVenue":null,
-      "workplace":"长沙师范学院附属第一幼儿园（具体校区见岗位表）",
-      "qualifications":"具体专业、资格与经历以公告附件1岗位表为准；2027年及以后毕业的在读生不可报名。",
-      "subjects":"直接考核（面试）：政治素养、师德师风、专业知识、科研能力、综合素质。",
-      "status":"招满即止·请核实","verified":"2026-09-30","notes":"考核时间与地点由后续通知公布；可能提前招满。不要将人社厅网页页脚地址当作考场。"
+      "id":"hangzhou-yuhang-20260108-liangzhu-it",
+      "title":"杭州市余杭区2026年第一批公开招聘中小学事业编制教师",
+      "region":"杭州","workCity":"杭州","workDistrict":"余杭区","sourceId":"hangzhou","published":"2026-01-08",
+      "url":"https://zjjcmspublic.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/jcms_files/jcms1/web3095/site/attach/0/cef729e8b88242509ac28d6a18f7b99d.pdf",
+      "school":"杭州市良渚职业高级中学","positions":"良渚职高信息技术教师","subject":"信息技术","positionCode":"45","plannedHires":1,
+      "applyDeadline":"2026-01-16","examTime":"学校自主考核，具体时间以通知为准","examVenue":"以考核通知为准",
+      "workplace":"杭州市余杭区·杭州市良渚职业高级中学；具体任职校区请向学校核实。",
+      "qualifications":"适用的教师资格证；专业要求含计算机科学与技术、教育技术学、软件工程、人工智能等，完整条件见岗位表。",
+      "subjects":"学校自主考核；具体科目以学校通知为准。","status":"报名已结束","verified":"2026-09-30"
     },
     {
-      "id":"shanghai-20260922-kindergarten",
-      "title":"2026年第四季度上海市市立幼儿园事业单位招聘简章",
-      "region":"上海","city":"上海·徐汇","sourceId":"shanghai","published":"2026-09-22",
-      "url":"https://rsj.sh.gov.cn/tzpgg_17408/20260921/t0035_1443852.html",
-      "kind":"招聘公告","school":"上海市市立幼儿园","positions":"幼儿教师（专技初级岗位）","plannedHires":10,
-      "applyWindow":"截至2026-10-10","applyDeadline":"2026-10-10","examTime":null,"examVenue":null,
-      "workplace":"上海市市立幼儿园；公告列出的徐汇区建国西路629号为联系地址，具体任职地点需向单位核实。",
-      "qualifications":"岗位一：相关专业本科及以上、应届、持教师资格证；岗位二：相关专业硕士及以上、38周岁及以下、持教师资格证。详见原文。",
-      "subjects":"徐汇区教育局统一组织心理素质测试、综合素质测试、笔试和专家面试；笔试具体科目未列明。",
-      "status":"报名中","verified":"2026-09-30","notes":"联系地址不等于考场地址，也不一定是最终工作地点。"
+      "id":"guangzhou-20260509-qhfw-it",
+      "title":"清华附中湾区学校2026年第一次公开招聘教师",
+      "region":"广州","workCity":"广州","workDistrict":null,"sourceId":"guangzhou","published":"2026-05-09",
+      "url":"https://jyj.gz.gov.cn/gk/zfxxgkml/bmwj/qtwj/content/post_10803655.html",
+      "school":"清华附中湾区学校","positions":"信息技术教师","subject":"信息技术","positionCode":"1-22","plannedHires":2,
+      "applyDeadline":"2026-05-19","examTime":"笔试原定2026-05-30；最终以准考证为准","examVenue":"笔试考场以准考证为准",
+      "workplace":"广州市·清华附中湾区学校；具体任职校区以官方岗位表及学校安排为准。",
+      "qualifications":"本科及以上、学士及以上；研究生专业含计算机科学与技术、软件工程、电子信息等，本科专业为教育技术学或计算机类；以本科学历报考还须满足岗位表所列职称或信息学竞赛条件。非2026年毕业生须持对应教师资格证。",
+      "subjects":"学科相关知识、专业综合素养、教育学、心理学；后续面试可含说课、试教或专业技能测试。",
+      "status":"报名已结束","verified":"2026-09-30"
     },
     {
-      "id":"beijing-20260710-shunyi",
-      "title":"顺义区教委所属事业单位2026年第三次公开招聘教师公告",
-      "region":"北京","city":"北京·顺义","sourceId":"beijing","published":"2026-07-10",
-      "url":"https://rsj.beijing.gov.cn/xxgk/gkzp/202607/t20260710_4756592.html",
-      "kind":"招聘公告","school":"顺义区教委所属事业单位","positions":"教师岗位33个","plannedHires":50,
-      "applyWindow":"2026-07-13 09:00 至 2026-07-21 17:00","applyDeadline":"2026-07-21","examTime":"以准考证为准","examVenue":"以准考证为准",
-      "workplace":"顺义区教委所属学校；具体岗位以附件1及教委安排为准。",
-      "qualifications":"具有岗位所需专业和相应学科教师资格；年龄38周岁及以下等，毕业生与社会人员要求不同，详见原文及附件1。",
-      "subjects":"笔试：教师综合知识（时事政治、师德、教师职业能力、教育法规、教育学、教育心理学等）；另有面试。",
-      "status":"报名已结束","verified":"2026-09-30","notes":"50人为计划招聘数，不是已录用人数。考试时间和考场仅在准考证中指定。"
+      "id":"shenzhen-guangming-20260609-yulu-it",
+      "title":"深圳市公办中小学2026年6月公开招聘教师",
+      "region":"深圳","workCity":"深圳","workDistrict":"光明区","sourceId":"shenzhen","published":"2026-06-09",
+      "url":"https://szeb.sz.gov.cn/home/xxgk/zthd/jszp/gbxx/content/post_12833188.html",
+      "school":"深圳市光明区玉律学校","positions":"初中信息技术教师","subject":"信息技术","positionCode":"GM2026005D0016","plannedHires":1,
+      "applyDeadline":"2026-06-22","examTime":"笔试2026-07-04；面试时间另行通知","examVenue":"笔试地点在深圳市，具体考场以准考证为准；面试地点以通知为准",
+      "workplace":"深圳市光明区·深圳市光明区玉律学校；具体任职校区请向学校核实。",
+      "qualifications":"本科及以上、学士及以上；教育技术学或计算机类等岗位表所列专业；18—40周岁；具备二级教师职称、初中及以上信息技术教师资格证，且有至少2年普通中学信息技术教学经历并仍在任教。",
+      "subjects":"教育类（初中）笔试：客观题与主观题，涵盖教育政策法规、教育基础理论、教师职业素养和教学实施要求；另有面试。",
+      "status":"报名已结束","verified":"2026-09-30"
     },
     {
-      "id":"beijing-20260707-beijingschool",
-      "title":"北京学校2026年公开招聘公告",
-      "region":"北京","city":"北京","sourceId":"beijing","published":"2026-07-07",
-      "url":"https://rsj.beijing.gov.cn/xxgk/gkzp/202607/t20260707_4750496.html",
-      "kind":"招聘公告","school":"北京学校","positions":"教师岗2人；教学辅助岗1人","plannedHires":3,
-      "applyWindow":"2026-07-10 09:00 至 2026-07-16 17:00","applyDeadline":"2026-07-16","examTime":"另行通知","examVenue":"另行通知",
-      "workplace":"北京学校；具体岗位地点需查附件岗位表。",
-      "qualifications":"学历学位、教师资格证、户籍或引进政策、英语能力等要求见原文及岗位表。",
-      "subjects":"笔试与面试；公告未列明笔试具体科目。",
-      "status":"报名已结束","verified":"2026-09-30","notes":"计划3人包含1个教学辅助岗；教师岗计划数为2人。"
+      "id":"shenzhen-guangming-20260609-tianliao-it",
+      "title":"深圳市公办中小学2026年6月公开招聘教师",
+      "region":"深圳","workCity":"深圳","workDistrict":"光明区","sourceId":"shenzhen","published":"2026-06-09",
+      "url":"https://szeb.sz.gov.cn/home/xxgk/zthd/jszp/gbxx/content/post_12833188.html",
+      "school":"深圳市光明区田寮小学","positions":"小学信息技术教师","subject":"信息技术","positionCode":"GM2026005D0019","plannedHires":1,
+      "applyDeadline":"2026-06-22","examTime":"笔试2026-07-04；面试时间另行通知","examVenue":"笔试地点在深圳市，具体考场以准考证为准；面试地点以通知为准",
+      "workplace":"深圳市光明区·深圳市光明区田寮小学；具体任职校区请向学校核实。",
+      "qualifications":"本科及以上、学士及以上；教育技术学或计算机类等岗位表所列专业；18—40周岁；小学及以上信息技术教师资格证，且有至少2年小学信息技术教学经历并仍在任教。",
+      "subjects":"教育类（小学）笔试：客观题与主观题，涵盖教育政策法规、教育基础理论、教师职业素养和教学实施要求；另有面试。",
+      "status":"报名已结束","verified":"2026-09-30"
+    },
+    {
+      "id":"shenzhen-dapeng-20260529-it",
+      "title":"大鹏新区教育系统2026年上半年面向全国选聘骨干教师",
+      "region":"深圳","workCity":"深圳","workDistrict":"大鹏新区","sourceId":"shenzhen","published":"2026-05-29",
+      "url":"https://www.dpxq.gov.cn/dpjywsjkj/gkmlpt/content/12/12812/post_12812771.html",
+      "school":"人大附中深圳学校","positions":"高中信息技术教师","subject":"信息技术","positionCode":"DP2026002D0003","plannedHires":1,
+      "applyDeadline":"2026-06-11","examTime":"以选聘后续通知为准","examVenue":"以面试通知为准",
+      "workplace":"深圳市大鹏新区·人大附中深圳学校；具体任职校区请向学校核实。",
+      "qualifications":"普通高等教育研究生、博士学位；报名前取得高中信息技术教师资格证；专业等条件见岗位表。",
+      "subjects":"选聘考核；具体面试形式与内容以官方通知为准。","status":"报名已结束","verified":"2026-09-30"
+    },
+    {
+      "id":"shenzhen-nanshan-20260513-it",
+      "title":"南山区教育系统2026年5月面向全国选聘优秀教师",
+      "region":"深圳","workCity":"深圳","workDistrict":"南山区","sourceId":"shenzhen","published":"2026-05-13",
+      "url":"https://www.szns.gov.cn/ztzl/slh/tzgg/content/post_12770051.html",
+      "school":"深圳市南山外国语学校（集团）","positions":"高中信息教师（信息技术教学）","subject":"信息技术","positionCode":"NS2026003D0001","plannedHires":1,
+      "applyDeadline":"2026-05-19","examTime":"以面试准考证为准","examVenue":"以面试准考证为准",
+      "workplace":"深圳市南山区·深圳市南山外国语学校（集团）；具体任职校区以学校安排为准。",
+      "qualifications":"本科及以上、学士及以上；高中信息技术教师资格证、一级教师资格及岗位表所列经历和业绩要求。",
+      "subjects":"面试；具体形式见准考证。","status":"报名已结束","verified":"2026-09-30"
     }
   ],
   "history": [],
-  "plans": [
-    {"title":"2026年中小学幼儿园教师公开招聘工作安排","region":"全国","date":"2026","type":"政策安排","detail":"人社部、教育部要求各地制定2026年度教师招聘工作方案。具体批次、报名和考试日期以各地后续公告为准。","url":"https://hudong.moe.gov.cn/jyb_xxgk/moe_1777/moe_1779/202604/t20260422_1434512.html"}
-  ]
+  "plans": []
 }
