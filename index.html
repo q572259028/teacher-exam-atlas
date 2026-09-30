@@ -4,32 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f7f3">
-  <meta name="description" content="聚焦杭州、广州、深圳实际工作地点的信息技术教师编制岗位，区分岗位地点与考试考场。">
-  <title>师考雷达｜杭广深信息技术教师岗位</title>
+  <meta name="description" content="面向2027届毕业生，聚焦杭州、广州、深圳实际工作地点的信息技术教师编制岗位，只展示可报名或即将报名的已核实岗位。">
+  <title>师考雷达｜2027届杭广深信息技术教师岗位</title>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="#top" aria-label="师考雷达首页"><span class="brand-mark">师</span><span>师考雷达</span></a><span class="topbar-note">2026 · 信息技术教师编制</span></div></header>
+  <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="#top" aria-label="师考雷达首页"><span class="brand-mark">师</span><span>师考雷达</span></a><span class="topbar-note">2027届 · 信息技术教师编制</span></div></header>
   <main id="top" class="wrap">
     <section class="intro" aria-labelledby="page-title">
-      <div class="eyebrow">岗位实际工作地点 · 杭州 / 广州 / 深圳</div>
-      <h1 id="page-title">信息技术教师岗位 <em>· 杭广深</em></h1>
-      <p>按实际任职地点筛选，考试地点另列。官方栏目每小时尝试巡检，新岗位核实后进入清单。</p>
+      <div class="eyebrow">2027届毕业生 · 实际工作地点在杭州 / 广州 / 深圳</div>
+      <h1 id="page-title">信息技术教师岗位 <em>· 2027届</em></h1>
+      <p>只列对2027届开放、仍可报名或即将报名的已核实岗位；考点另列。官方栏目每小时尝试巡检。</p>
     </section>
     <section class="summary" aria-label="岗位概况">
-      <div><strong id="active-count">—</strong><span>正在报名的已核实岗位</span></div>
-      <div><strong id="position-count">—</strong><span>已核实目标岗位</span></div>
+      <div><strong id="active-count">—</strong><span>当前可报岗位</span></div>
+      <div><strong id="city-count">3</strong><span>关注的工作城市</span></div>
       <div><strong id="last-check">—</strong><span>最近一次官方栏目巡检 · 北京时间</span></div>
     </section>
     <section class="jobs section" id="jobs" aria-labelledby="jobs-title">
-      <div class="section-heading"><div><p class="section-kicker">FOCUSED RESULTS</p><h2 id="jobs-title">岗位清单</h2><p>按报名状态和发布日期排序；每条都指向官方原文或岗位表。</p></div><span class="result-count" id="results-label">加载中…</span></div>
-      <div class="filters"><label class="search-field"><span class="sr-only">搜索学校或岗位</span><input id="search" type="search" placeholder="搜索学校、岗位或区县"></label><label class="city-field"><span class="sr-only">选择工作城市</span><select id="city-filter"><option value="">全部工作城市</option><option value="杭州">杭州</option><option value="广州">广州</option><option value="深圳">深圳</option></select></label></div>
+      <div class="section-heading"><div><p class="section-kicker">2027 GRADUATES</p><h2 id="jobs-title">可报岗位</h2><p>按实际工作地点筛选。已过报名期限及仅面向其他届别的岗位不展示。</p></div><span class="result-count" id="results-label">加载中…</span></div>
+      <div class="filters" id="filters"><label class="search-field"><span class="sr-only">搜索学校或岗位</span><input id="search" type="search" placeholder="搜索学校、岗位或区县"></label><label class="city-field"><span class="sr-only">选择工作城市</span><select id="city-filter"><option value="">全部工作城市</option><option value="杭州">杭州</option><option value="广州">广州</option><option value="深圳">深圳</option></select></label></div>
       <div id="notice-list" class="notice-list" aria-live="polite"></div>
     </section>
     <section class="context section" aria-label="来源与数据说明">
-      <div class="context-row"><div><h2>官方巡检入口</h2><p>仅作新公告线索。公告标题通常不含具体学科，发现链接后仍须核对岗位表和工作地点。</p></div><div id="source-list" class="source-list"></div></div>
-      <div class="context-row"><div><h2>历史招录与后续计划</h2><p>暂无同一岗位、同一批次的官方实考人数和最终录用人数，暂不计算通过比例。</p><p>三地信息技术岗位的下一批具体时间，待官方发布后更新。</p></div><div class="method-note"><b>地点口径</b><span>工作地点看招聘学校及岗位表；考试地点看准考证或考务通知。学校联系地址不自动视作任职校区。</span></div></div>
+      <div class="context-row"><div><h2>官方巡检入口</h2><p>新公告须核对岗位表、2027届资格及报名时间后才进入清单；巡检成功不代表有可报岗位。</p></div><div id="source-list" class="source-list"></div></div>
+      <div class="context-row"><div><h2>后续计划</h2><p>杭广深信息技术教师岗位的下一批具体报名时间，以官方公告为准。此前批次不作为可报名岗位展示。</p></div><div class="method-note"><b>地点口径</b><span>工作地点看招聘学校及岗位表；考试地点看准考证或考务通知。学校联系地址不自动视作任职校区。</span></div></div>
     </section>
   </main>
   <footer><div class="wrap">独立信息导航项目 · 报名资格、编制属性和考试安排以最新官方公告及附件为准。</div></footer>

@@ -1,7 +1,11 @@
 const $ = (selector) => document.querySelector(selector);
 const FOCUS_CITIES = new Set(['杭州', '广州', '深圳']);
 const FOCUS_SUBJECT = /信息技术|信息科技|计算机|人工智能/;
-const todayChina = () => new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const FOCUS_COHORT = '2027';
+const todayChina = () => {
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(part => [part.type,part.value]));
+  return `${parts.year}-${parts.month}-${parts.day}`;
+};
 const formatDate = (value) => value ? value.replaceAll('-', '.') : '未公布';
 let dataset;
 
@@ -15,11 +19,16 @@ function safeLink(url) {
   try { const parsed = new URL(url); return parsed.protocol === 'https:' ? parsed.href : '#'; }
   catch { return '#'; }
 }
-function focusedNotices() {
-  return dataset.notices.filter(item => FOCUS_CITIES.has(item.workCity) && FOCUS_SUBJECT.test(item.subject || ''));
+function applicationState(item) {
+  if (!item.applyDeadline || ['报名已结束','已取消','暂停'].includes(item.status)) return null;
+  if (item.applyDeadline < todayChina()) return null;
+  if (item.applyDeadlineAt && new Date(item.applyDeadlineAt) < new Date()) return null;
+  if (item.applyStartAt && new Date(item.applyStartAt) > new Date()) return '即将报名';
+  if (item.applyStart && item.applyStart > todayChina()) return '即将报名';
+  return '报名中';
 }
-function isOpen(item) {
-  return !!item.applyDeadline && item.applyDeadline >= todayChina() && item.status === '报名中';
+function focusedNotices() {
+  return dataset.notices.filter(item => FOCUS_CITIES.has(item.workCity) && FOCUS_SUBJECT.test(item.subject || '') && item.eligibleCohorts?.includes(FOCUS_COHORT) && applicationState(item));
 }
 function field(label, value, className = '') {
   const box = node('div', 'field ' + className);
@@ -29,14 +38,16 @@ function field(label, value, className = '') {
 function renderNotices() {
   const query = $('#search').value.trim().toLowerCase();
   const city = $('#city-filter').value;
-  const items = focusedNotices()
+  const focused = focusedNotices();
+  $('#filters').hidden = focused.length === 0;
+  const items = focused
     .filter(item => (!city || item.workCity === city) && (!query || [item.title,item.school,item.positions,item.workDistrict,item.positionCode].some(value => value?.toLowerCase().includes(query))))
-    .sort((a,b) => Number(isOpen(b)) - Number(isOpen(a)) || (b.published || '').localeCompare(a.published || ''));
+    .sort((a,b) => Number(applicationState(b) === '报名中') - Number(applicationState(a) === '报名中') || (b.published || '').localeCompare(a.published || ''));
   $('#results-label').textContent = items.length + ' 条岗位';
   const list = $('#notice-list'); list.replaceChildren();
   if (!items.length) {
     const empty = node('div','empty-state');
-    empty.append(node('strong','','没有符合筛选条件的已核实岗位'),node('p','','可调整搜索；新公告只有核实学科及工作地点后才会进入清单。'));
+    empty.append(node('strong','',focused.length ? '没有符合搜索条件的岗位' : '目前没有已核实、仍可报考的2027届信息技术教师岗位'),node('p','',focused.length ? '可调整搜索或工作城市。' : '2025年的2026届校招及已过报名期限的公告不会混入清单。可在下方查看官方栏目与最近巡检时间。'));
     list.append(empty); return;
   }
   items.forEach(item => {
@@ -44,7 +55,8 @@ function renderNotices() {
     const head = node('div','card-head');
     const title = node('div','card-title');
     title.append(node('div','card-meta',item.workCity + (item.workDistrict ? ' · ' + item.workDistrict : '') + '  /  ' + (item.school || '招聘单位待核')),node('h3','',item.positions || item.title));
-    const status = node('span',isOpen(item) ? 'status open' : 'status closed',isOpen(item) ? '报名中' : '报名已结束');
+    const state = applicationState(item);
+    const status = node('span',state === '报名中' ? 'status open' : 'status upcoming',state);
     head.append(title,status);
     const facts = node('dl','fact-grid');
     facts.append(
@@ -66,8 +78,8 @@ function renderNotices() {
 }
 function renderSummary() {
   const focused = focusedNotices();
-  $('#active-count').textContent = focused.filter(isOpen).length;
-  $('#position-count').textContent = focused.length;
+  $('#active-count').textContent = focused.filter(item => applicationState(item) === '报名中').length;
+  $('#city-count').textContent = FOCUS_CITIES.size;
   $('#last-check').textContent = dataset.generatedAt ? new Date(dataset.generatedAt).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}) : '尚未运行';
 }
 function renderSources() {

@@ -18,6 +18,12 @@ class DiscoverTests(unittest.TestCase):
     def test_invalid_date_is_missing(self):
         self.assertIsNone(normalize_date("2026-13-45"))
 
+    def test_same_host_http_notice_is_upgraded_to_https(self):
+        html = '<a href="http://rsj.example.gov.cn/notice/3.html">2027届教师招聘公告</a> 2026-09-30'
+        rows = discover(self.source, html)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["url"], "https://rsj.example.gov.cn/notice/3.html")
+
 
 if __name__ == "__main__":
     unittest.main()

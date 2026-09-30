@@ -8,7 +8,7 @@ import ssl
 import sys
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -19,7 +19,7 @@ OUTPUT = ROOT / "data/publications.json"
 DATE = re.compile(r"20\d{2}[-./年]\d{1,2}[-./月]\d{1,2}")
 EDUCATION = re.compile(r"教师|教育|幼儿园|师范|学校|学院|大学|辅导员|教委")
 RECRUITMENT = re.compile(r"招聘|选聘|招录|招考|人才引进")
-SKIP = re.compile(r"公务员|军队文职|三支一扶|特岗教师|志愿者|拟聘|公示|面试公告|成绩|体检|资格复审")
+SKIP = re.compile(r"公务员|军队文职|三支一扶|特岗教师|志愿者|拟聘|公示|面试|成绩|体检|资格复审|资格审查|补充公告|有关安排|更正")
 
 
 class Links(HTMLParser):
@@ -80,8 +80,10 @@ def discover(source, html):
             continue
         url = urllib.parse.urljoin(source["url"], href)
         parsed = urllib.parse.urlparse(url)
-        if parsed.scheme != "https" or parsed.hostname != source["host"]:
+        if parsed.hostname != source["host"] or parsed.scheme not in ("https", "http"):
             continue
+        if parsed.scheme == "http":
+            url = urllib.parse.urlunparse(parsed._replace(scheme="https"))
         date = normalize_date(" ".join(tail[:8]))
         found.append({"id": "link-" + source["id"] + "-" + re.sub(r"[^a-zA-Z0-9]", "", parsed.path)[-40:],
                       "title": title, "region": source["region"], "city": None, "sourceId": source["id"],
@@ -114,7 +116,9 @@ def main():
             health[source["id"]] = {"ok": False, "checkedAt": now, "error": str(error)[:180]}
             print(f"{source['id']}: {error}", file=sys.stderr)
     curated_urls = {item["url"] for item in curated["notices"]}
-    discovered = [item for item in previous.values() if item["url"] not in curated_urls]
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=21)).date().isoformat()
+    discovered = [item for item in previous.values()
+                  if item["url"] not in curated_urls and (item.get("published") or item.get("firstSeen", "")[:10]) >= cutoff]
     discovered.sort(key=lambda x: (x.get("published") or "", x.get("lastSeen") or ""), reverse=True)
     result = {"generatedAt": now, "sources": sources, "health": health,
               "notices": curated["notices"], "discovered": discovered[:400],

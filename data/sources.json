@@ -1,5 +1,6 @@
 [
   {"id":"hangzhou","name":"杭州市教育局公告公示","region":"杭州","url":"https://edu.hangzhou.gov.cn/col/col1229424876/index.html","host":"edu.hangzhou.gov.cn","kind":"list","scope":"杭州市教育系统公告"},
   {"id":"guangzhou","name":"广州市教育局通知公告","region":"广州","url":"https://jyj.gz.gov.cn/yw/tzgg/","host":"jyj.gz.gov.cn","kind":"list","scope":"广州市教育系统公告"},
+  {"id":"guangzhou-nansha","name":"南沙区教育信息","region":"广州","url":"https://www.gzns.gov.cn/zwgk/zdlyxxgk/jyxx/","host":"www.gzns.gov.cn","kind":"list","scope":"南沙区教育系统公告"},
   {"id":"shenzhen","name":"深圳市教育局公办学校","region":"深圳","url":"https://szeb.sz.gov.cn/home/xxgk/zthd/jszp/gbxx/","host":"szeb.sz.gov.cn","kind":"list","scope":"深圳市公办学校招聘"}
 ]
