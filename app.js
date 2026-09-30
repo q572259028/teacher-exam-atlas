@@ -56,7 +56,7 @@ function renderNotices() {
     if (item.verifiedRecord && statusFor(item) === '报名中') tags.append(node('span','tag gray','报名中'));
     body.append(tags,node('h3','',item.title));
     const meta = node('div','notice-meta');
-    [item.city || item.region,`发布日期 ${cnDate(item.published)}`,sourceFor(item.sourceId)?.name || '官方来源'].forEach(value => meta.append(node('span','',value)));
+    [item.city || item.region,`发布日期 ${cnDate(item.published)}`,sourceFor(item.sourceId)?.name || '官方来源',item.verifiedRecord ? `摘要核对 ${cnDate(item.verified)}` : null].filter(Boolean).forEach(value => meta.append(node('span','',value)));
     body.append(meta);
     const button = node('button','',item.verifiedRecord ? '查看详情 ↗' : '查看链接 ↗');
     button.type = 'button'; button.addEventListener('click',() => openDetails(item));
@@ -72,7 +72,7 @@ function detailItem(label,value,wide=false) {
 function openDetails(item) {
   const box = $('#dialog-content'); box.replaceChildren();
   box.append(node('h2','dialog-title',item.title));
-  box.append(node('div','dialog-sub',`${item.region} · ${cnDate(item.published)} · ${sourceFor(item.sourceId)?.name || '官方来源'}`));
+  box.append(node('div','dialog-sub',`${item.region} · 发布于 ${cnDate(item.published)} · ${sourceFor(item.sourceId)?.name || '官方来源'}${item.verified ? ` · 摘要核对于 ${cnDate(item.verified)}` : ''}`));
   const grid = node('div','detail-grid');
   grid.append(detailItem('招聘岗位',item.positions),detailItem('计划招聘人数',item.plannedHires === null ? null : `${item.plannedHires} 人`));
   grid.append(detailItem('报名时间',item.applyWindow),detailItem('考试时间',item.examTime));
